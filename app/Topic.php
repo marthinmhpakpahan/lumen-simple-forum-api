@@ -14,14 +14,10 @@ class Topic extends Model
      */
     protected $fillable = ['user_id', 'title', 'content', 'status'];
 
-    protected $visible = ['id', 'user_id', 'title', 'content', 'status', 'created_at', 'updated_at', 'user', 'category'];
+    protected $visible = ['id', 'user_id', 'title', 'content', 'status', 'created_at', 'updated_at', 'user'];
 
     public function user() {
         return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
-    public function category() {
-        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
 }
