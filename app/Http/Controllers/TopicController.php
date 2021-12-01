@@ -88,7 +88,7 @@ class TopicController extends Controller
             "data" => []
         ];
 
-        $topic = Topic::with('user')->with('category')->find($id);
+        $topic = Topic::with('user')->find($id);
         if($topic) {
             $response = [
                 "error" => false,
@@ -148,7 +148,7 @@ class TopicController extends Controller
         $status = $request->status ?: 'active';
         $user_id = $request->user_id;
 
-        $topics = Topic::with('user')->with('category')->where('status', $status)->get();
+        $topics = Topic::with('user')->where('status', $status)->get();
         if($user_id) {
             $topics = Topic::where('user_id', $user_id)->get();
         }
