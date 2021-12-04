@@ -96,4 +96,44 @@ class UserController extends Controller
         }
         return response()->json($response);
     }
+
+    public function update(Request $request) {
+        $response = [
+            "error" => true,
+            "message" => "User gagal diubah!",
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'full_name' => 'required',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $response['message'] = $validator->errors()->first();
+            return response()->json($response);
+        }
+
+        $user = User::find($request->user_id);
+        $user->username = $request->username;
+        $user->password = md5($request->password);
+        $user->email = $request->email;
+        $user->full_name = $request->full_name;
+        $user->gender = $request->gender;
+        $user->address = $request->address;
+        $saved = $user->save();
+
+        if($saved) {
+            $response = [
+                "error" => false,
+                "message" => "User berhasil diubah!"
+            ];
+        }
+        
+        return response()->json($response);
+    }
 }

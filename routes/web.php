@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 $router->post('/user/register', 'UserController@register');
 $router->post('/user/login', 'UserController@login');
 $router->get('/user/show/{id}', 'UserController@show');
+$router->post('/user/update/', 'UserController@update');
 $router->post('/topic/create', 'TopicController@create');
 $router->post('/topic/update', 'TopicController@update');
 $router->get('/topic/', 'TopicController@index');
