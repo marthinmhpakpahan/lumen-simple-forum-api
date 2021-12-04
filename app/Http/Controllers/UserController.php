@@ -106,7 +106,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'username' => 'required',
-            'password' => 'required',
             'email' => 'required',
             'full_name' => 'required',
             'gender' => 'required',
@@ -120,7 +119,9 @@ class UserController extends Controller
 
         $user = User::find($request->user_id);
         $user->username = $request->username;
-        $user->password = md5($request->password);
+        if(isset($request->password) && trim($request->password) != "") {
+            $user->password = md5($request->password);
+        }
         $user->email = $request->email;
         $user->full_name = $request->full_name;
         $user->gender = $request->gender;
