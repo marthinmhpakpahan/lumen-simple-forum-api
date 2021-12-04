@@ -68,7 +68,7 @@ class CommentController extends Controller
             "data" => []
         ];
 
-        $comments = Comment::with('user')->where('topic_id', $id)->where('status', 'active')->get();
+        $comments = Comment::with('user')->where('topic_id', $id)->where('status', 'active')->orderBy('comments.created_at', 'DESC')->get();
 
         if($comments) {
             $response = [

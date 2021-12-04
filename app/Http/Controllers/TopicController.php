@@ -148,7 +148,7 @@ class TopicController extends Controller
         $status = $request->status ?: 'active';
         $user_id = $request->user_id;
 
-        $topics = Topic::with('user')->withCount('comment')->where('status', $status)->get();
+        $topics = Topic::with('user')->withCount('comment')->where('status', $status)->orderBy('topics.created_at', 'DESC')->get();
         if($user_id) {
             $topics = Topic::where('user_id', $user_id)->get();
         }
