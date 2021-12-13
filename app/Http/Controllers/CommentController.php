@@ -49,8 +49,7 @@ class CommentController extends Controller
         ];
 
         $comment = Comment::find($id);
-        $comment->status = 'deleted';
-        $deleted = $comment->save();
+        $deleted = $comment->delete();
         if($deleted) {
             $response = [
                 "error" => false,
